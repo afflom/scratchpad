@@ -1,0 +1,41 @@
+{
+  "name": "Categorical X",
+  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+  "features": {
+    "ghcr.io/devcontainers/features/rust:1": {},
+    "ghcr.io/guiyomh/features/just:0": {},
+    "ghcr.io/lumenpink/devcontainer-features/wasm-pack:0": {},
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "21",
+      "jdkDistro": "ms"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rust-lang.rust-analyzer",
+        "anthropic.claude-code",
+        "leanprover.lean4"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "[rust]": {
+          "editor.defaultFormatter": "rust-lang.rust-analyzer"
+        },
+        "rust-analyzer.check.command": "clippy",
+        "rust-analyzer.procMacro.enable": true,
+        "rust-analyzer.cargo.allFeatures": true,
+        "search.exclude": {
+          "**/target": true
+        },
+        "files.watcherExclude": {
+          "**/target/**": true
+        }
+      }
+    }
+  },
+  "remoteEnv": {
+    "PATH": "/home/codespace/.elan/bin:/home/codespace/.cargo/bin:${containerEnv:PATH}"
+  },
+  "postCreateCommand": "sudo npx -y playwright@latest install-deps chromium && curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none"
+}
